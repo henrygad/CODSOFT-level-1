@@ -1,0 +1,30 @@
+* ::after, ::before {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+html{
+    font-family: sans-serif, serif;
+}
+body{
+    scroll-behavior: smooth;
+    overflow: hidden;
+}
+
+:root{
+    --primary-color: #2947A9;
+    --secondary-color: #F9995D;
+    --neutral-900-color: #292E3D;
+    --neutral-800-color: #292E3D;
+    --neutral-700-color:#3D445C; 
+    --text-color: #858EAD;
+
+    --primary-font: "Roboto";
+    --secondary-font: "Poppins";
+}
+
