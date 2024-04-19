@@ -3,13 +3,208 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="">
+    <link rel="icon" href="./assests/favicon.svg">
     <title>The Box</title>
 
     <link rel="stylesheet" href="./styles.css">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet">
 </head>
 <body>
-    
+    <header>
+        <nav class="container header_nav">
+            <div class="logo_wrapper">
+                <img id="header_logo" src="./assests/logo.svg" alt="the box">
+            </div>
+            <div class="nav_list_wrapper">
+
+                <div class="deck_top_nav">
+                    <ul>
+                        <li id="home">Home</li>
+                        <li id="about">About us</li>
+                        <li id="projects">Projects</li>
+                        <li id="Services">Services</li>
+                        <li id="Contact">Contact us</li>
+                    </ul>
+                </div>
+
+
+                <div class="mobile_nav">
+                    <div id="hamburger_open" class="hamburger_open">
+                        <img src="./assests/icons/hamgurger-open.svg" alt="hamburger_open">
+                    </div>
+
+                    <div  id="mobile_nav_list_wrapper" class="mobile_nav_wrapper">
+                        <div id="hamburger_close" class="hamburger_close">
+                            <img src="./assests/icons/hamgurger-close.svg" alt="hamburger_close">
+                        </div>
+
+                        <div id="mobile_nav_list" class="list_wrapper ">
+                            <ul>
+                                <li id="home">Home</li>
+                                <li id="about">About us</li>
+                                <li id="projects">Projects</li>
+                                <li id="Services">Services</li>
+                                <li id="Contact">Contact us</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                
+            </div>
+        </nav>
+    </header>
+    <main>
+        <section class="hero">
+            <div class="container hero_text">
+                <h1>Building things <br> is our mission.</h1>
+            </div>
+            <div class="container hero_box">
+                <div class="box">
+                    <div class="text_wrapper">
+                        <h2>Feature Projects</h2>
+                        <p>The National University of Architecture</p>
+                    </div>
+                    <div class="navigation_wrapper">
+                        <div class="left"><img src="./assests/icons/arrow-left.svg" alt="arrow icon">Back</div>
+                        <div class="right">Front <img src="./assests/icons/arrow-right.svg" alt="arrow icon"></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section class="container section reputation">
+            <div class="title"><h2 class="subheader">Our Reputation</h2></div>
+            <div class="flex_content_wrapper">
+                <div class="boxs">
+                    <img src="./assests/icons/support.jpg" alt="the box ">
+                    <h3>Best Services</h3>
+                    <p>Nullam senectus porttitor in eget. Eget rutrum leo interdum.</p>
+                </div>
+                <div class="boxs">
+                    <img src="./assests/icons/support.jpg" alt="the box ">
+                    <h3>Best Teams</h3>
+                    <p>Ultricies at ipsum nunc, tristique nam lectus.</p>
+                </div>
+                <div class="boxs">
+                    <img src="./assests/icons/design.jpg" alt="the box ">
+                    <h3>Best Design</h3>
+                    <p>Cursus semper tellus volutpat aliquet lacus. </p>
+                </div>
+            </div>
+        </section>
+        <section class="container section about_us">
+            <div class="about_us_img">
+            </div>
+            <div class="text_content">
+                <div class="box">
+                    <div class="title">
+                        <h2 class="subheader">
+                        About us
+                        </h2>
+                    </div>
+                    <div class="paragraph">
+                        <p>For more than 30 years we have been delivering world-class construction and we’ve built many lasting relationships along the way. 
+                        <br>  
+                            <span>We’ve matured into an industry leader and trusted resource for those seeking quality, innovation and reliability when building in the U.S.</span>
+                        </p>
+                    </div>
+                    <div class="btn_wrapper">
+                        <button class="btn">More on Our History</button>
+                    </div>
+                </div>
+            </div>        
+        </section>
+        <section class="container section services">
+            <div class="title"><h2 class="subheader">Services</h2></div>
+            <div class="grid_container">
+                <div class="boxs">
+                    <img src="./assests/icons/construction.jpg" alt="the box">
+                    <span class="stroke"></span>
+                    <p>Construction</p>
+                </div>
+                <div class="boxs blue_bg">
+                    <img src="assests/icons/renovation.svg" alt="the box">
+                    <span class="stroke"></span>
+                    <p>Renovation</p>
+                </div>
+                <div class="boxs">
+                    <img src="assests/icons/consultation.jpg" alt="the box">
+                    <span class="stroke"></span>
+                    <p>Consultation</p>
+                </div>
+                <div class="boxs blue_bg">
+                    <img src="./assests/icons/repair.svg" alt="the box">
+                    <span class="stroke"></span>
+                    <p>Repair Services</p>
+                </div>
+                <div class="boxs">
+                    <img src="./assests/icons/Architecture.jpg" alt="the box">
+                    <span class="stroke"></span>
+                    <p>Architecture</p>
+                </div>
+                <div class="boxs blue_bg">
+                    <img src="./assests/icons/eletric.svg" alt="the box">
+                    <span class="stroke"></span>
+                    <p>Electric</p>
+                </div>
+            </div>
+        </section>
+        <section class="container section experience">
+            <div class="boxs_wrapper">
+              <div class="boxs">
+                <img src="./assests/icons/clients.jpg" alt="the box">
+                <h3>84</h3>
+                <div class="text_wrapper">
+                    <span></span>
+                    <p>Happy Clients</p>
+                </div>
+              </div>
+              <div class="boxs">
+                <img src="./assests/icons//projects.jpg" alt="the box">
+                <h3>123</h3>
+                <div class="text_wrapper">
+                    <span></span>
+                    <p>Projects Completed</p>
+                </div>
+              </div>
+              <div class="boxs">
+                <img src="./assests/icons/awards.jpg" alt="the box">
+                <h3>37</h3>
+                <div class="text_wrapper">
+                    <span></span>
+                    <p>Awards Win</p>
+                </div>
+              </div>
+              <div class="boxs">
+                <img src="./assests/icons/years.jpg" alt="the box">
+                <h3>30</h3>
+                <div class="text_wrapper">
+                    <span></span>
+                    <p>Years in Business</p>
+                </div>
+              </div>
+            </div>
+            <div class="content_wrapper">
+                <div class="title"><h2 class="subheader">30 Years Experience</h2></div>
+                <p>
+                    Our company has been the leading provided construction services to clients throughout the USA since 1988.
+                </p>
+                <button class="btn">Contact Us</button>
+            </div>
+        </section>
+        <section class="container section consultation">
+            <div class="content_wrapper">
+                <div class="text_wrapper">
+                    <h2 class="subheader">Free consultation with exceptional quality</h2>
+                    <p>Just one call away: +84 1102 2703</p>
+                </div>
+                <div class="button_wrapper">
+                    <button class="btn">Get your consultation</button>
+                </div>
+            </div>
+        </section>
+    </main>
+    <footer>
+        <script type="" src="./main.js"></script>
+    </footer>
 </body>
 </html>
