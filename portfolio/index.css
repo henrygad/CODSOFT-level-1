@@ -1,0 +1,162 @@
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&family=Volkhov:ital,wght@0,400;0,700;1,400;1,700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400..700&display=swap" rel="stylesheet');
+
+
+@import url('./css/header.css');
+@import url('./css/hero.css');
+@import url('./css/about.css');
+@import url('./css/skills.css');
+@import url('./css/project.css');
+@import url('./css/resume.css');
+@import url('./css/contact.css');
+@import url('./css/footer.css');
+
+
+* ::after, ::before {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+:root{
+    --primary-color: #2A84BF;
+    --secondary-color: #A23E40;
+    --bg: #0f0711;
+
+    --primary-font:  'Volkhov, sans-serif, serif';
+    --button-font: 'Google Sans';
+    --backup-font: 'roboto';
+    --text-font: 'poppins';
+    --logo-font: "Dancing Script", cursive;
+}
+html{
+    font-family: var(--primary-color);
+}
+body{
+    scroll-behavior: smooth;
+    color: #fff;
+    background-color: var(--bg);
+}
+h1{
+    font-size: var(--primary-font);
+    font-size: 2.8rem;
+    font-weight: 900;
+    letter-spacing: .9px;
+}
+h2{
+    font-size: var(--primary-font);
+    font-size: 1.8rem;
+    font-weight: 900;
+    letter-spacing: .9px;
+}
+p{
+    font-family: var(--text-font);
+    font-size: 1rem;
+    line-height: 1.4rem;
+    letter-spacing: .8px;
+}
+h3{
+    font-family: var(--backup-font);
+    font-size: 1.2rem;
+}
+input, button, a, textarea{
+    font-family: var(--button-font);
+    font-size: 1rem;
+    border: 0;
+    outline: none;
+    color: #fff;
+    text-decoration: none;
+}
+input:-webkit-autofill {
+    -webkit-box-shadow: 0 0 0 50px var(--bg) inset; /* Change the color to your own background color */
+    -webkit-text-fill-color: #fff;
+}
+
+/* Global css class & styling */
+.btn{
+    padding-block: 10px;
+    background-image: linear-gradient(to right, var(--primary-color), var(--secondary-color));
+    border-radius: 2px;
+    cursor: pointer;
+    opacity: 1;
+    transition: all .5s ease;
+}
+.btn:hover{
+    background-image: linear-gradient(to right,  var(--secondary-color), var(--primary-color));
+}
+.btn:active{
+    opacity: .6;
+}
+h2 ~ .stroke{
+    display: block;
+    width: 60px;
+    height: 2px;
+    border-radius: 4px;
+    background-color: var(--secondary-color);
+    margin-top: 10px;
+}
+.container{
+    padding-inline: 2rem;
+}
+.section{
+    padding-block: 100px;
+    width: 100%;
+}
+.section .content{
+    padding-top: 40px;
+    overflow: hidden;
+}
+.section .title{
+    text-align: center;
+    margin-inline: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.section .title > h3{
+   color: var(--primary-color);
+}
+
+
+
+@media (min-width: 481px){
+ }
+   
+@media (min-width: 767px){
+    h1{
+        font-size: 4rem;
+    }
+    h2{
+        font-size: 3rem;
+    }
+
+    .container{
+        padding-inline: 4rem;
+    }
+    h2 ~ .stroke{
+        width: 120px;
+    }
+   
+ }
+
+ @media (min-width: 1025px){
+    h1{
+        font-size: 6rem;
+    }
+    .container{
+        padding-inline: 8rem;
+    }
+   
+ }
+
+ @media (min-width: 1465px){
+    
+    .container{
+        padding-inline: 12rem;
+    }
+ } 
+

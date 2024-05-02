@@ -1,0 +1,10 @@
+footer .copy_right{
+    display: flex;
+    justify-content: center;
+    padding-top: 100px;
+    padding-bottom: 8px;
+}
+.copy_right p{
+   font-size: .9rem;
+   letter-spacing: .9px;
+}

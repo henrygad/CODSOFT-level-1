@@ -1,0 +1,14 @@
+
+.resume .content{
+    min-height: 180px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.resume .content .resume_btn_wrapper{
+     position: relative;
+}
+.resume .content a{
+    padding-inline: 40px;
+    padding-block: 10px;
+}

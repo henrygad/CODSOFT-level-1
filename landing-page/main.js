@@ -3,6 +3,7 @@ const hamburgerClose_ele = document.querySelector('#hamburger_close')
 const mobileNavList_ele = document.querySelector('#mobile_nav_list')
 const mobileNavListWrapper = document.querySelector('#mobile_nav_list_wrapper')
 
+
 let isOpen  = false
 
 const Handlemobilenav = () => {

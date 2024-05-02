@@ -1,0 +1,123 @@
+
+.about .title h2{
+    margin-top: 10px;
+}
+.about .content{
+    display: flex;
+    flex-wrap: wrap;
+    row-gap: 80px;
+    column-gap: 40px;
+    justify-content: center;
+}
+.about .content .text_wrapper{
+    flex: 1 1 280px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    row-gap: 30px;
+}
+.about .content .text_wrapper h4{
+   width: 100%;
+   max-width: 480px;
+   text-align: center;
+   font-family: var(--logo-font);
+   font-size: 1.6rem;
+}
+.about .content .text_wrapper p {
+    max-width: 280px;
+    line-height: 1.6rem;
+    letter-spacing: .8px;
+    text-align: center;
+}
+.about .content .text_wrapper p  span:nth-child(1){
+    font-size: .8rem;
+    color: lightgray;
+    white-space: nowrap;
+    cursor: pointer;
+}
+.about .content .text_wrapper p span:nth-child(2){
+    display: block;
+    margin-top: 20px;
+}
+.about .content .img_wrapper{
+    position: relative;
+    flex: 1 1 280px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.about .content .img_wrapper > .image{
+    min-width: 280px;
+    height: 280px;
+    background-image: url('../assest/henryportfolioimg.png');
+    background-repeat: no-repeat;
+    background-position-x: center;
+    background-position-y: 25%;
+    background-size: cover;
+    background-color: transparent;
+}
+.about .content .img_wrapper > .image_bg{
+    width: 280px;
+    height: 200px;
+    position: absolute;
+    top: 55.5%;
+    left: 50%;
+    transform: translatex(-50%) translatey(-50%) ;
+    background-image: linear-gradient( to right top, var(--secondary-color), var(--primary-color));
+    border-radius: 4px;
+    z-index: -1;
+}
+.about .content .img_wrapper .socials_wrapper{
+    max-width: 280px;
+    margin-top: 20px;
+    display: flex;
+    align-items: center;
+    column-gap: 30px;
+    justify-content: center;
+}
+.about .content .img_wrapper .socials_wrapper img{
+    height: 20px;
+    object-fit: contain;
+}
+
+
+
+@media (min-width: 481px){
+   
+}
+  
+@media (min-width: 767px){
+    .about .content .text_wrapper{
+       align-items: flex-end;
+    }
+    .about .content .text_wrapper p {
+        max-width: 480px;
+        text-indent: 1rem;
+        text-align: start;
+    }
+
+    .about .content .img_wrapper > .image{
+        min-width: 380px;
+        height: 380px;
+    }
+    .about .content .img_wrapper > .image_bg{
+        width: 380px;
+        height: 300px;
+        top: 54%;
+    }
+
+    .about .content .img_wrapper .socials_wrapper{
+        max-width: 380px;
+        column-gap: 60px;
+    }
+}
+
+@media (min-width: 1025px){
+  
+}
+
+@media (min-width: 1465px){
+   
+} 
+
