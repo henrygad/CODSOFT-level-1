@@ -1,54 +1,67 @@
-import evalute from "./cal/evalute.js";
-const output_ele = document.querySelector('#output')
-const input_ele = document.querySelector('#input')
-const keys_ele = document.querySelectorAll('.key')
-let keydata = ''
-let inputValues = ''
-let outputValue = ''
+import math from "./cal/math.js";
+const display_result_ele = document.querySelector('#output')
+const display_input_ele = document.querySelector('#input')
+const inputs_ele = document.querySelectorAll('.input')
+const action_ele = document.querySelectorAll('.action')
 
-for(const keys of keys_ele){
-    keys.addEventListener('click', ()=>{
-        keydata = keys.dataset.key
-       
-        if(keydata === "AC"){
-            inputValues = ''
-            outputValue = ''
-        }else if(keydata === '='){
-            inputValues = outputValue
-        }else if(keydata === 'DEL'){
-            if(outputValue)inputValues = inputValues.slice(0, -2)
-            else inputValues = inputValues.slice(0, -1)
-
-        }else{ if(keyRepent(keydata, inputValues))inputValues += keydata}
-
-        outputValue = evalute(keydata)
-        input_ele.value = fillter(inputValues )
-        output_ele.innerHTML = outputValue
-    })
+class Calculator{    
+    constructor(){
+        this.entry = ''
+        this.result = ''
+        this.entries = ''
+    }
+    getEntry(entry){
+        this.entry = entry
+        return this.filterEntries()    
+    }
+    filterEntries(){
+        this.entries += this.entry
+        const firstItem = this.entries[0]
+        const arrlength = this.entries.length
+        const lastItem = this.entries[arrlength - 1]
+        const secondtothelast = this.entries[arrlength - 2]
+        const match = ['/', '*', '+', '-', '.']
+        const match1 = ['/', '*', '+', '.', '%']
+        
+        if(match1.includes(firstItem) && match1.includes(lastItem)) return this.entries = this.entries.slice(0, -1)
+        if(match.includes(secondtothelast) && match.includes(lastItem)) return this.entries = this.entries.slice(0, -1)
+        return this.entries  
+    }
+    fitterinput(){
+         this.entries = this.entries.split('').filter((item) => {
+            if(item === '%') item = !item
+            return item 
+        }).join('')
+        return this.entries
+    }
+    deleteEntry(){
+        return this.entries = this.entries.slice(0, -1)
+    }
+    clearallEntries(){
+        return this.entries = ''
+    }
+    evaluateEntries(){
+        return this.entries = math(this.fitterinput()).toString()
+    }
+    evaluatePercentageEntry(){
+      return this.entries = parseFloat(this.entries) / 100
+    }
 }
 
-function keyRepent(value , value2) {
-    const last_input = value2.slice(-1)
-  
-    if(value === '.' && last_input === '.' )return false 
-    if(value === '+' && last_input === '+')return false 
-    if(value === '-' && last_input === '-')return false  
-    if(value === '*' && last_input === '*')return false  
-    if(value === '/' && last_input === '/')return false  
-    if(value === '%' && last_input === '%')return false 
- 
-    return true 
- } 
+const calculator = new Calculator()
 
- function fillter(value){
-    const firstValues = value.split('')
-
-    if(firstValues[0] === '%')return firstValues[0] = ''
-    else if(firstValues[0] === '/') return firstValues[0] = ''
-    else if(firstValues[0] === '*') return firstValues[0] = ''
-    else if(firstValues[0] === '+') return firstValues[0] = ''
-    else if(firstValues[0] === '.') return firstValues[0] = ''
-    else if(firstValues[0] === '=')firstValues[0] = ''
-    else return firstValues.join('')
- }
- 
+for(const input of inputs_ele){
+    input.addEventListener('click', (e)=>{
+        if(input.dataset.key === '%') {
+            display_result_ele.innerHTML = calculator.evaluatePercentageEntry()
+        }
+        display_input_ele.value = calculator.getEntry(input.dataset.key)
+    })
+}
+for(const action of action_ele){
+    action.addEventListener('click', (e)=>{ 
+        if(action.dataset.key === '=') display_result_ele.innerHTML = calculator.evaluateEntries()
+        if(action.dataset.key === 'D') display_input_ele.value = calculator.deleteEntry()
+        if(action.dataset.key === 'C') display_result_ele.innerHTML = display_input_ele.value =  calculator.clearallEntries()
+    })
+}
