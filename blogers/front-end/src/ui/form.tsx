@@ -65,3 +65,10 @@ export const Button = tw.button`
   rounded-md
   cursor-pointer
 `
+export const Errorformmessage = tw.p`
+    text-red-800 
+    text-[.7rem] 
+    font-text 
+    w-full 
+    text-center
+`

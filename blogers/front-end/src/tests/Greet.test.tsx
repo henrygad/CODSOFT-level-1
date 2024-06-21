@@ -1,5 +1,5 @@
 import {render, screen} from "@testing-library/react"
-import Greet from '../component/Greet'
+import Greet from '../components/Greet'
 
 describe('Greet user', () => {
     it('should render a greeting to user if a name prop is provided', () => {

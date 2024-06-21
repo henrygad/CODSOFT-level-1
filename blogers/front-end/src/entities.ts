@@ -27,10 +27,11 @@ export type Blogpostprops = {
   slug: string
   title: string
   body: string
-  cartigory: string
-  tags: string
+  cartigory: string[]
+  tags: string[]
   image: string
   date: string
   likes: number
   views: number
+  Published: boolean
 }

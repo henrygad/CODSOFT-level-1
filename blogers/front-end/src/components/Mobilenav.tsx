@@ -3,10 +3,10 @@ import { Dotlist} from '../ui/List'
 import { ReactElement, useState } from 'react'
 import Nav from './Nav'
 
-const Mobilenav = ({ Children }: { Children: ReactElement}) => {
+const Mobilenav = ({ Children, className }: { Children: ReactElement, className?: string}) => {
     const [toggleNav, setToggleNav] =useState(false)
    
-    return <>
+    return <div className={className}>
         <nav className='relative w-full'>
             <Ul className={`${!toggleNav ? 'bg-gray-100' : ' bg-gray-200 '}`} onClick={()=> setToggleNav(!toggleNav)}>
                 <Dotlist />
@@ -19,7 +19,7 @@ const Mobilenav = ({ Children }: { Children: ReactElement}) => {
                 <Nav className='flex-col justify-center gap-3' Children={Children}/>
             </div>
         </div>
-    </>
+    </div>
 }
 
 export default Mobilenav

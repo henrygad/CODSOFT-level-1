@@ -1,6 +1,6 @@
 import Nav from "./Nav"
 import { NavLink } from 'react-router-dom'
-import { Navlist} from '../ui/List'
+import { Navlist } from '../ui/List'
 
 const Footer = () => {
     return <footer>
@@ -15,13 +15,14 @@ const Footer = () => {
                     <Nav className=" flex-col gap-4" Children={<>
                         <Navlist><NavLink to="/">Home</NavLink></Navlist>
                         <Navlist><NavLink to="/about-us">About</NavLink></Navlist>
-                        <Navlist><NavLink to="/contact-us">contact</NavLink></Navlist> </>}
+                        <Navlist><NavLink to="/contact-us">contact</NavLink></Navlist>
+                    </>}
                     />
                 </div>
             </div>
             <div id="copywrite" className="text-center font-text text-sm pb-1">copyright 2022 all right revered</div>
         </div>
     </footer>
-  }
-  
-  export default Footer
+}
+
+export default Footer

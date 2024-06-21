@@ -1,26 +1,36 @@
-import {Routes, Route} from "react-router-dom"
-import {Home, About, Contact, Searchresult, Profile, Editeprofile, Creatablogpost, Singleblogpost, Editblogpost} from './pages'
-import {Suspense} from "react"
-import {Header} from './component'
+import { Routes, Route, Navigate } from "react-router-dom"
+import { Home, About, Contact, Search, Profile, Editeprofile, Creatablogpost, Singleblogpostpage, Editblogpost, Page404, Settings, Timeline, Notification } from './pages'
+import { Suspense, useEffect } from "react"
+import { Botttomnav, Header } from './components'
+import { useContextAuthentication } from "./hooks"
 
 const App = () => {
-  return <div className="bg-white">
-      <Header/>
-      <Suspense fallback={<div className="font-text font-semibold text-stone-900 w-full h-screen flex justify-center items-center">Loading...</div>}>
-        <Routes>
-          <Route path="/" element={<Home/>} />
-          <Route path="/about-us" element={<About />} />
-          <Route path="/contact-us" element={<Contact />} />
-          <Route path="/:userName" element={ <Profile />} />
-          <Route path="/:userName/timeline" element={ <div>timeline</div>} />
-          <Route path="/:userName/editprofile" element={<Editeprofile/>} />
-          <Route path="/:userName/createblogpost" element={<Creatablogpost/>} />
-          <Route path="/:userName/:blogpostSlug/editblogpost" element={<Editblogpost/>} />
-          <Route path="/:userName/searchresult" element={<Searchresult />} />
-          <Route path="/:authorUserName/:blogpostSlug" element={<Singleblogpost />} />
-          <Route path="*" element={<div className="font-text font-semibold text-stone-900 w-full h-screen flex justify-center items-center"> 404, page not found</div>} />
-        </Routes>
-      </Suspense>
+  const { isLogin, loginUser } = useContextAuthentication()
+
+  useEffect(() => {
+    if (isLogin) localStorage.setItem('userLogined', loginUser)
+  }, [isLogin])
+
+  return <div className="bg-white pb-20">
+    <Header />
+    <Suspense fallback={<div className="font-text font-semibold text-stone-900 w-full h-screen flex justify-center items-center">Loading...</div>}>
+      <Routes>
+        <Route path="/about-us" element={<About />} />
+        <Route path="/contact" element={<Contact />} />
+        <Route path="/:authorUserName/:slug/post" element={<Singleblogpostpage />} />
+        <Route path="/" element={isLogin ? <Navigate to={`/${loginUser}`} /> : <Home />} />
+        <Route path="/:userName" element={isLogin ? <Profile /> : <Navigate to={'/'} />} />
+        <Route path="/timeline" element={isLogin ? <Timeline /> : <Navigate to={'/'} />} />
+        <Route path="/createblogpost" element={isLogin ? <Creatablogpost /> : <Navigate to={'/'} />} />
+        <Route path="/notification" element={isLogin ? <Notification /> : <Navigate to={'/'} />} />
+        <Route path="/editprofile" element={isLogin ? <Editeprofile /> : <Navigate to={'/'} />} />
+        <Route path="/:slug/editblogpost" element={isLogin ? <Editblogpost /> : <Navigate to={'/'} />} />
+        <Route path="/Search" element={isLogin ? <Search /> : <Navigate to={'/'} />} />
+        <Route path="/settings" element={isLogin ? <Settings /> : <Navigate to={'/'} />} />
+        <Route path="*" element={<Page404 />} />
+      </Routes>
+    </Suspense>
+    {isLogin && <Botttomnav />}
   </div>
 }
 

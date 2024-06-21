@@ -2,22 +2,30 @@ import { lazy } from "react";
 const Home = lazy(()=> import('./Home'))
 const About = lazy(()=> import('./About'))
 const Contact = lazy(()=> import('./Contact'))
-const Searchresult = lazy(()=> import('./Searchresult'))
+const Search = lazy(()=> import('./Search'))
 const Profile = lazy(()=> import('./Profile'))
 const Editeprofile = lazy(()=> import('./Editeprofile'))
 const Creatablogpost = lazy(()=> import('./Creatablogpost'))
-const Singleblogpost = lazy(()=> import('./Singleblogpost'))
+const Singleblogpostpage = lazy(()=> import('./Singleblogpostpage'))
 const Editblogpost = lazy(()=> import('./Editblogpost'))
+const Settings = lazy(()=> import('./Settings'))
+const Page404 = lazy(()=> import('./Page404'))
+const Timeline = lazy(()=> import('./Timeline'))
+const Notification = lazy(()=> import('./Notification'))
 
 
 export {
   Home,
   About,
   Contact,
-  Searchresult,
+  Search,
   Profile,
   Editeprofile,
   Creatablogpost,
-  Singleblogpost,
+  Singleblogpostpage,
   Editblogpost,
+  Settings,
+  Page404,
+  Timeline,
+  Notification,
 }

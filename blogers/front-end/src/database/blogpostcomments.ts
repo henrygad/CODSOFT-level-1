@@ -1,10 +1,9 @@
-import { blogpostdata } from "./blogpost";
 
 export const commentsdata =[
    {
     id:'1234567890firstcomment',
     blogpostId: '1234567890henrygad',
-    commentorUsername: '@timothykendrick',
+    commentorUsername: '@timothy',
     body: 'Hmm what a nice blogpost, how let go and start my own blogpost webiste',
    },
    {
@@ -18,5 +17,11 @@ export const commentsdata =[
     blogpostId: '1234567890timothykendrick',
     commentorUsername: '@henrygad',
     body: 'thank you timothy for this nice blog post it was timeling and fitting for my goal',
+   },
+   {
+    id:'1234567890forthcomment',
+    blogpostId: '1234567890gripz',
+    commentorUsername: '@henrygad',
+    body: 'wow, just the right topic i have been to kooking for to read and money to start my life from fresh, thank you @daniel for this blog post',
    },
 ]
