@@ -8,7 +8,7 @@ const useFollowBtn = ({ userName }: { userName: string }) => {
     const {logingDialog, setLoginDialog} = useContextLoginDialog()
     const { userData: { following }, dispatch } = useContextUserData()
     const [Isfollowed, setIsFollowed] = useState(false)
-
+    
     useEffect(() => {
         if (isLogin) {
             const followed = following.includes(userName)

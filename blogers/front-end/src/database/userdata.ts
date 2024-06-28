@@ -14,18 +14,10 @@ export const userData = [
     country: 'nigeria',
     phonenumber: +1247025672168,
     website: 'webstarter.com',
-    followers: [
-      '@timothy', '@gripz',
-    ],
-    following: [
-      '@timothy',
-    ],
-    interested: [
-      'rich', 
-    ],
-    timeline: [
-      '@henrygad', '@timothy',
-    ],
+    followers: ['@timothy', '@gripz',],
+    following: [ '@timothy',],
+    interested: ['rich',],
+    timeline: ['@henrygad', '@timothy',],
     notifications: [
       {
         type: 'follow',
@@ -54,7 +46,7 @@ export const userData = [
         blogpostSlug: 'how-to-create-a-blog-post-in-two-seconds',
         views: 1233,
       }
-    ],
+      ],
   },
   {
     id: '1234567890timothyloveday',
@@ -104,7 +96,7 @@ export const userData = [
       '@henrygad',
     ],
     interested: [
-      'rich',  
+      'rich',
     ],
     timeline: [
       '@gripz', '@henrygad', '@timothy',

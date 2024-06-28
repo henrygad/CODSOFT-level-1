@@ -3,8 +3,8 @@ import { Context } from '../contexts/CommentData'
 
 const useContextComments = () => {
   const Props = useContext(Context)
-  const comments = Props.state.Comments
-  const dispatch = Props.dispatch
+  const comments = Props?.state.Comments
+  const dispatch = Props?.dispatch
   return {comments, dispatch}
 }
 

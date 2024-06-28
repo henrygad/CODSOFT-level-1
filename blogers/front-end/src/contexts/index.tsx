@@ -4,6 +4,7 @@ import BlogpostData from "./BlogpostData";
 import CommentData from "./CommentData";
 import PageTitleUpdater from "./PageTitleUpdater";
 import LoginDialog from "./LoginDialog";
+import Creatablogpost from "./CreateBlogpost";
 
 export {
     UserAuthentication,
@@ -12,4 +13,6 @@ export {
     CommentData,
     PageTitleUpdater,
     LoginDialog,
+    Creatablogpost
+
 }

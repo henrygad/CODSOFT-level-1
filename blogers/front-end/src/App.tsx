@@ -11,7 +11,7 @@ const App = () => {
     if (isLogin) localStorage.setItem('userLogined', loginUser)
   }, [isLogin])
 
-  return <div className="bg-white pb-20">
+  return <div className="bg-white text-stone-800 dark:bg-stone-900 dark:text-white min-h-screen">
     <Header />
     <Suspense fallback={<div className="font-text font-semibold text-stone-900 w-full h-screen flex justify-center items-center">Loading...</div>}>
       <Routes>

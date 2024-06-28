@@ -8,9 +8,12 @@ const Footer = () => {
             <div className="flex justify-between items-center">
                 <div className=" space-y-4">
                     <div id='logo'>
-                        <p className='font-secondary text-xl font-bold capitalize text-green-800 cursor-pointer'>
-                            <NavLink to="/">Bloggers</NavLink>
-                        </p>
+                        <NavLink to="/">
+                            <p className='font-secondary cursor-pointer'>
+                                <span className='font-bold text-green-700 text-xl'>Blog</span>
+                                <span className='font-semibold text-base '>gers</span>
+                            </p>
+                        </NavLink>
                     </div>
                     <Nav className=" flex-col gap-4" Children={<>
                         <Navlist><NavLink to="/">Home</NavLink></Navlist>

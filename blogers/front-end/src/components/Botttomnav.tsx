@@ -1,32 +1,38 @@
-import React from 'react'
 import Nav from './Nav'
 import { Navlist } from '../ui/List'
 import { NavLink } from 'react-router-dom'
-import { useContextAuthentication } from '../hooks'
+import { useContextAuthentication, useContextOnCreateBlogpost } from '../hooks'
+import { Penicon,  Homeicon, Notificationsicon, Mailicon, Profileicon, Searchicon} from './Icons'
 
 
 const Botttomnav = () => {
-    const {loginUser} = useContextAuthentication()
+    const { loginUser } = useContextAuthentication()
+    const { onCreateBlogpost } = useContextOnCreateBlogpost()
 
     const bottomNavList = [
-        {url: '/timeline',  displayName: 'home'},
-        {url: '/search', displayName: 'search'},
-        {url: '/notification', displayName: 'nf'},
-        {url: '/directmessage', displayName: 'dm'},
-        {url: '/'+loginUser, displayName: 'profile'},
+        { url: '/timeline', displayName: <Homeicon/>, linkName: 'home' },
+        { url: '/search', displayName: <Searchicon size='2'/>, linkName: 'search'},
+        { url: '/notification', displayName: <Notificationsicon/>, linkName: 'notification' },
+        { url: '/directmessage', displayName: <Mailicon/>, linkName: 'message' },
+        { url: '/' + loginUser, displayName: <Profileicon/>, linkName: 'profile page' },
     ]
 
-    return <div className='relative'>
-        <div className='container fixed right-0 left-0 bottom-0 py-4 bg-white border-t shadow-sm'>
-            <Nav className=' justify-between gap-10 w-full' Children={<>
+    return <div className='relative '>
+        <div className='container fixed right-0 left-0 bottom-0 border-t bg-white dark:bg-stone-900 py-4 shadow-sm z-[100]'>
+            <Nav className=' justify-between w-full' Children={<>
                 {bottomNavList.map((list) =>
-                    <Navlist key={list.displayName}> <NavLink to={list.url} >{list.displayName}</NavLink></Navlist>
+                    <Navlist key={list.linkName} className='first-letter:capitalize'> <NavLink to={list.url} >{list.displayName}</NavLink></Navlist>
                 )}
             </>} />
-            <div className='relative'>
-                <div className=' absolute  -top-60 right-1'>
-                    <NavLink to='/createblogpost' > <button className=' h-12 w-12 rounded-full bg-green-400 text-white font-text text-sm font-semibold border shadow-md'>post</button></NavLink> 
-                </div>
+            <div className='relative '>
+                {!onCreateBlogpost &&
+                    <div className='absolute -top-40 right-1'>
+                        <NavLink to='/createblogpost' >
+                            <button className='flex justify-center items-center h-10 w-10 border rounded-full shadow-md'>
+                                <Penicon />
+                            </button>
+                        </NavLink>
+                    </div>}
             </div>
         </div>
     </div>

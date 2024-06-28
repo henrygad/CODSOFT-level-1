@@ -7,18 +7,24 @@ import Screenpanel from './Screenpanel'
 import Nav from "./Nav"
 import Blogposteditor from "./Blogposteditor"
 import Mobilenav from "./Mobilenav"
-import Displayuserquickinfor from "./Displayuserquickinfor"
+import Userquickinfor from "./Userquickinfor"
 import Followbutton from './Followbutton'
 import Commenteditor from "./Commenteditor"
 import Singlecomment from "./Singlecomment"
 import Botttomnav from "./Botttomnav"
 import { Allsearchresault, Blogpostssearchresault, Profilessearchresault, Groupssearchresault} from "./Searchresultlayouts"
-import { Followuser, Commentedonblogpost } from "./Notificationlayouts"
+import { Followed, Commentedonblogpost, Liked } from "./Notificationlayouts"
 import Logindialog from "./Logindialog"
 import Listcomments from "./Listcomments"
 import Listuserquickinfor from "./Listuserquickinfor"
 import Singleinterested from "./Singleinterested"
 import Listsingleinterested from "./Listsingleinterested"
+import Singleblogpost from "./Singleblogpost"
+import Treading from "./Treading"
+import Scrollhorizontalnav from "./Scrollhorizontalnav"
+import Searchform from "./Searchform"
+import {Viewicon, Likeicon, Commenticon, CopyLinkicon, Penicon, Editicon,
+     Deleteicon, Searchicon, Settingsicon, Addphotoicon} from './Icons'
 
 export {
     Header,
@@ -30,7 +36,7 @@ export {
     Nav,
     Blogposteditor,
     Mobilenav,
-    Displayuserquickinfor,
+    Userquickinfor,
     Followbutton,
     Commenteditor,
     Singlecomment,
@@ -39,12 +45,27 @@ export {
     Blogpostssearchresault,
     Profilessearchresault,
     Groupssearchresault,
-    Followuser, 
+    Followed, 
     Commentedonblogpost,
+    Liked,
     Logindialog,
     Listcomments,
     Listuserquickinfor,
     Singleinterested,
     Listsingleinterested,
+    Singleblogpost,
+    Treading,
+    Scrollhorizontalnav,
+    Searchform,
+    Viewicon,
+    Likeicon, 
+    Commenticon,
+    CopyLinkicon,
+    Penicon, 
+    Editicon, 
+    Deleteicon,
+    Searchicon,
+    Settingsicon, 
+    Addphotoicon
 }
 

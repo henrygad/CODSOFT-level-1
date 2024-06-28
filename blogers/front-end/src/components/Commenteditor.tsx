@@ -4,7 +4,7 @@ import { useContextComments } from '../hooks'
 import { useContextAuthentication } from '../hooks'
 import useContextLoginDialog from '../hooks/useContextLoginDialog'
 
-const Commenteditor = ({ blogpostId, parentComment }: { parentComment?: string, blogpostId: string }) => {
+const Commenteditor = ({ blogpostId}: { blogpostId: string }) => {
     const { isLogin, loginUser } = useContextAuthentication()
     const {logingDialog, setLoginDialog} = useContextLoginDialog()
     const [body, setBody] = useState('')
@@ -23,6 +23,7 @@ const Commenteditor = ({ blogpostId, parentComment }: { parentComment?: string, 
 
             dispatch({ type: 'CREATE_COMMENT', payload: comment })
             setBody('')
+            
             bodyRef.current?.focus()
         }else {
             setLoginDialog(!logingDialog)

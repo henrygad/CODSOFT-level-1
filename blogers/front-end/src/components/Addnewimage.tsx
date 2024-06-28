@@ -1,36 +1,31 @@
 import React, { useState } from 'react'
-import imageicon from '../assert/imageicon.png'
 import tw from 'tailwind-styled-components'
+import { useUploadImage } from '../hooks'
+import {Addphotoicon} from './Icons'
 
-const Addnewimage = ({ image }: { image?: string }) => {
-  const [putImage, setPutImage] = useState(image)
+const Addnewimage = ({image}: {image: string}) => {
+  const [getImage, setgetImage] = useState<string | ArrayBuffer>(image)
   const [isImageChanged, setisImageChanged] = useState(false)
 
-  function handleReadFile(e: React.ChangeEvent<HTMLInputElement>) {
+  const handleReadFile = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    if (!e.target.files) return
     const file = e.target.files[0]
-    const reader = new FileReader()
-    reader.readAsDataURL(file)
-
-    reader.onload = function (e) {
-      setPutImage(e.target.result)
-    }
+    await useUploadImage({ file }).then((image) => setgetImage(image.data.link)).catch((error) => console.log(error))
+    setisImageChanged(!isImageChanged)
   }
 
-  const cancleChangeImaged = ()=> {setPutImage(image); setisImageChanged(false)}
+
 
   return {
-    Displayimage: ({ className }: { className?: string }) =>
-      <label htmlFor="image" className={`${className} block relative object-contain bg-center bg-contain bg-no-repeat `} style={{ backgroundImage: `url(${putImage})` }}>
-        <Image src={imageicon} alt={''} />
-        <input className='absolute top-0 right-0 left-0 bottom-0 opacity-0 cursor-pointer' type='file' onChange={(e) => { handleReadFile(e); setisImageChanged(true) }} accept="image/png, image/gif, image/jpeg" />
-      </label>, putImage, isImageChanged, setisImageChanged, cancleChangeImaged
+    Displayimageinput: () => <div className='relative'>
+      <Addphotoicon/>
+      <input className='absolute top-0 right-0 left-0 bottom-0 opacity-0 cursor-pointer' type='file' onChange={(e) => handleReadFile(e)} accept="image/png, image/gif, image/jpeg" />
+    </div>, getImage, setgetImage, isImageChanged, setisImageChanged
   }
 }
-
 export default Addnewimage
 
-const
- Image = tw.img`
+const Image = tw.img`
   block 
   h-6 
   w-6

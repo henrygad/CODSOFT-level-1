@@ -1,5 +1,5 @@
 
-const useCopyLinkBtn = ({authorUserName, slug}: {authorUserName: string, slug: string}) => {
+const useCopyLinkBtn = ({authorUserName, slug}: {authorUserName: string, slug: string | undefined}) => {
     const handleCopyLink =()=>{
         navigator.clipboard.writeText(`http://localhost:5173/${authorUserName}/${slug}/post`)
         .then(()=>console.log('copied'))

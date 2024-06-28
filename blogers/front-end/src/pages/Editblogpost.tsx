@@ -1,6 +1,6 @@
 import { useParams } from 'react-router-dom'
 import { Blogposteditor } from '../components'
-import { useContextAuthentication, useContextBlogpost, useContextShowPageTitle } from '../hooks'
+import { useContextAuthentication, useContextBlogpost, useContextOnCreateBlogpost, useContextShowPageTitle } from '../hooks'
 import { useEffect } from 'react'
 
 const Editblogpost = () => {
@@ -10,8 +10,12 @@ const Editblogpost = () => {
   const {blogPost} = useContextBlogpost()
   const fetchBlogpost = blogPost.find((blogpost: {authorUserName: string, slug: string})=> blogpost.authorUserName === loginUser && blogpost.slug === slug)
   const {setShowPageTitle} = useContextShowPageTitle()
+  const {setOnCreateBlogpost} = useContextOnCreateBlogpost()
 
-  useEffect(()=>{setShowPageTitle('edit blogpost')}, [])
+  useEffect(()=>{
+    setShowPageTitle('edit blogpost')
+    setOnCreateBlogpost(false)
+  }, [])
 
   const Displayeditor= Blogposteditor({ 
     toCreateNewBlogpost: false, 
@@ -26,7 +30,7 @@ const Editblogpost = () => {
   })
 
   return <main>
-    <div className=" container w-screen min-h-[80vh] pt-4">
+    <div className=" container w-screen min-h-[80vh] pt-4 pb-20">
       {Displayeditor}
     </div>
   </main>

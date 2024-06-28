@@ -1,16 +1,23 @@
 import { Nav } from '../components'
 import { Navlist } from '../ui/List'
 import { NavLink } from 'react-router-dom'
-import { useContextAuthentication, useContextShowPageTitle, useContextUserData } from '../hooks'
+import { useContextAuthentication, useContextOnCreateBlogpost, useContextShowPageTitle, useContextUserData } from '../hooks'
 import tw from 'tailwind-styled-components'
 import { useEffect } from 'react'
+import { Roundedbtn } from '../ui/buttons'
+
+
 
 const Settings = () => {
     const { userData, dispatch} = useContextUserData()
     const {setIsLogin} = useContextAuthentication()
     const {setShowPageTitle} = useContextShowPageTitle()
+    const {setOnCreateBlogpost} = useContextOnCreateBlogpost()
 
-    useEffect(()=>{setShowPageTitle('settings')}, [])
+    useEffect(()=>{
+        setShowPageTitle('settings')
+        setOnCreateBlogpost(false)
+    }, [])
 
     const navs = [
         { name: 'edit profile', to: '/editprofile' },
@@ -32,19 +39,19 @@ const Settings = () => {
 
     
     return <main className=''>
-        <div className='container pt-10'>
+        <div className='container pt-10 pb-16'>
             <div className='space-y-4 '>
                 <Nav className='flex-col gap-4' Children={
                     <>
                         {navs && navs.map((nav) =>
-                            <Navlist key={nav.name} className='border-b p-2'>
-                                <NavLink to={nav.to}> <button>{nav.name}</button></NavLink>
+                            <Navlist key={nav.name}>
+                                <NavLink to={nav.to}> <button className='first-letter:capitalize'>{nav.name}</button></NavLink>
                             </Navlist>
                         )}
                     </>
                 } />
                  <div className=''>
-                    <Button onClick={handleLogOut}>Log out</Button>
+                    <Roundedbtn onClick={handleLogOut}>Log out</Roundedbtn>
                 </div>
                 <div className=''>
                     <Button onClick={handleDeleteAccount}>Delete account</Button>

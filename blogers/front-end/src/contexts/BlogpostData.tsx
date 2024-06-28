@@ -1,10 +1,26 @@
-import { createContext, useReducer, ReactElement, useEffect } from "react";
+import { createContext, useReducer, ReactElement, useEffect, Dispatch } from "react";
 import { blogpostdata } from "../database/blogpost";
 import { useContextAuthentication } from "../hooks";
+import { Blogpostprops } from "../entities";
 
-export const Context = createContext({})
+type State = { Blogpost: Blogpostprops[] }
 
-const reducer = (state: { Blogpost: { id: string }[] }, action: { type: string, payload: {}[] }) => {
+type Action =
+    | { type: "DISPLAY_BLOGPOST", payload: Blogpostprops[] }
+    | { type: "CREATE_BLOGPOST", payload: Blogpostprops }
+    | { type: "EDIT_BLOGPOST", payload: { id: string } }
+    | { type: "DELETE_BLOGPOST", payload: { id: string } }
+
+
+type Contextprops = {
+    state: { Blogpost: Blogpostprops[] }
+    dispatch: React.Dispatch<Action>
+}
+
+
+export const Context = createContext<Contextprops | {}>({})
+
+const reducer = (state: State, action: Action): State => {
     switch (action.type) {
         case "DISPLAY_BLOGPOST":
             return {
@@ -31,6 +47,7 @@ const BlogpostData = ({ Children }: { Children: ReactElement }) => {
     const [state, dispatch] = useReducer(reducer, {
         Blogpost: [],
     })
+
     const { loginUser } = useContextAuthentication()
     useEffect(() => {
         const fetchBlogpost = blogpostdata.filter((items) => items.authorUserName === loginUser)

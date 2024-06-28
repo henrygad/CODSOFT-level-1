@@ -1,10 +1,24 @@
 import { ReactElement, createContext, useEffect, useReducer } from "react"
 import { userData } from "../database/userdata"
 import { useContextAuthentication } from "../hooks"
+import { Userprops } from "../entities"
 
-export const Context = createContext({})
+type State = { userData: Userprops }
+type Action =
+    | { type: "FETCH_USERDATA", payload: Userprops }
+    | { type: "EDIT_USERDATA", payload: Userprops }
+    | { type: "DELETE_USERDATA", payload: Userprops }
+    | { type: "CREATE_FOLLOWING", payload: string }
+    | { type: "DELETE_FOLLOWING", payload: string }
 
-const reducer = (state: { userData: { following: [], timeline: [], interested: [], notifications: [] } }, action: { type: string, payload: {} }) => {
+type Contextprops = {
+    state: {  userData: Userprops }
+    dispatch: React.Dispatch<Action>
+}
+
+export const Context = createContext<Contextprops| {}>({})
+
+const reducer = (state: State, action: Action): State => {
     switch (action.type) {
         case "FETCH_USERDATA":
             return {
@@ -28,10 +42,10 @@ const reducer = (state: { userData: { following: [], timeline: [], interested: [
             }
         case "DELETE_FOLLOWING":
             return {
-                userData: { 
-                    ...state.userData, 
-                    following: state.userData.following.filter((following: string | {}) => following !== action.payload), 
-                    timeline: state.userData.timeline.filter((interest: string | {}) => interest !== action.payload), 
+                userData: {
+                    ...state.userData,
+                    following: state.userData.following.filter((following: string | {}) => following !== action.payload),
+                    timeline: state.userData.timeline.filter((interest: string | {}) => interest !== action.payload),
                 }
             }
         default:
@@ -41,13 +55,25 @@ const reducer = (state: { userData: { following: [], timeline: [], interested: [
 
 export const UserData = ({ Children }: { Children: ReactElement }) => {
     const [state, dispatch] = useReducer(reducer, {
-        userData: { 
-            following: [], 
-            timeline: [] , 
-            notifications: [],
+        userData: {
+            id: '',
+            userName: '',
+            name: '',
+            image: '',
+            birthday: '',
+            bio: '',
+            email: '',
+            country: '',
+            phonenumber: 0,
+            website: '',
+            followers: [],
+            following: [],
             interested: [],
-        },
+            timeline: [],
+            notifications: [],
+        }
     })
+
     const { loginUser } = useContextAuthentication()
 
     useEffect(() => {

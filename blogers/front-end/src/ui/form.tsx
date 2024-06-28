@@ -21,7 +21,6 @@ export const Form = tw.form`
    md:min-w-[420px] 
    max-w-[420px] 
    space-y-6 
-   bg-white 
    p-10
    rounded-md
    shadow-md
@@ -29,27 +28,22 @@ export const Form = tw.form`
 export const Label = tw.label`
   font-text 
   text-base
-  text-stone-600 
   pl-1 
 `
 export const Input= tw.input`
-  bg-gray-50 
   w-full 
   p-3
-  rounded-sm 
   font-text 
   text-sm 
-  text-stone-800"
   outline-none
-  rounded-md
+ bg-transparent
+ border
+ rounded
 `
 export const Textarea = tw.textarea`
-  bg-gray-50 
   p-3
-  rounded-sm 
   font-text 
   text-sm 
-  text-stone-800"
   outline-none
   rounded-md
 `

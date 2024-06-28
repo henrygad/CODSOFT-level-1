@@ -8,16 +8,16 @@ const Mobilenav = ({ Children, className }: { Children: ReactElement, className?
    
     return <div className={className}>
         <nav className='relative w-full'>
-            <Ul className={`${!toggleNav ? 'bg-gray-100' : ' bg-gray-200 '}`} onClick={()=> setToggleNav(!toggleNav)}>
+            <Ul onClick={()=> setToggleNav(!toggleNav)}>
                 <Dotlist />
                 <Dotlist />
                 <Dotlist />
             </Ul>
         </nav>
         <div className='relative'>
-            <div className={`${!toggleNav && ' hidden'} absolute top-10 right-10 p-8 rounded-md bg-gray-800`}>
+            <Mobilenanlistlayout className={`${!toggleNav? 'opacity-0 invisible': 'opacity-100 visible'}`}>
                 <Nav className='flex-col justify-center gap-3' Children={Children}/>
-            </div>
+            </Mobilenanlistlayout>
         </div>
     </div>
 }
@@ -33,9 +33,22 @@ const Ul = tw.ul`
     absolute 
     top-2 
     right-2 
-    h-6 
-    w-6 
+    p-[.4rem]
+    transition-colors
     rounded-full 
+    bg-gray-100
+     dark:bg-stone-800
+     active:bg-blue-100
     cursor-pointer
-    shadow-md
+`
+
+const Mobilenanlistlayout = tw.div`
+    absolute 
+    top-3 
+    right-8 
+    p-4 
+    rounded 
+    bg-gray-100 
+    dark:bg-stone-700
+    transition-all
 `

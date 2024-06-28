@@ -1,7 +1,13 @@
 import { ReactElement, createContext, useState } from "react"
 
+type Contextprops = {
+  isLogin: boolean
+  setIsLogin: React.Dispatch<React.SetStateAction<boolean>> 
+  loginUser: string 
+  setLoginUser: React.Dispatch<React.SetStateAction<string>>
+}
 
-export const Context = createContext({})
+export const Context = createContext<Contextprops | {}>({})
 
 
 const userLogined: string  = localStorage.getItem('userLogined')

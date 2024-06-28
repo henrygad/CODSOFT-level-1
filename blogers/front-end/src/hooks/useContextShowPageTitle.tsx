@@ -3,8 +3,8 @@ import { Context } from "../contexts/PageTitleUpdater"
 
 const useContextShowPageTitle = () => {
     const Props = useContext(Context)
-    const showPageTitle = Props.displayPageTitle
-    const setShowPageTitle = Props.setDisplayPageTitle
+    const showPageTitle = Props?.displayPageTitle
+    const setShowPageTitle = Props?.setDisplayPageTitle
   return {showPageTitle, setShowPageTitle}
 }
 

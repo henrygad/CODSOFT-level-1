@@ -1,21 +1,9 @@
-import tw from 'tailwind-styled-components'
 import { useFollowBtn } from '../hooks'
+import { Roundedbtn } from '../ui/buttons'
 
-const Followbutton = ({userName}: {userName: string}) => {
-    const {handleFollow, Isfollowed} = useFollowBtn({userName})
-  return <Followbtn  onClick={handleFollow}>{Isfollowed? 'following' : 'follow'}</Followbtn>
+const Followbutton = ({ userName }: { userName: string }) => {
+  const { handleFollow, Isfollowed } = useFollowBtn({ userName })
+  return <div className='flex justify-center items-center'><Roundedbtn onClick={handleFollow}>{Isfollowed ? 'following' : 'follow'}</Roundedbtn></div>
 }
 
 export default Followbutton
-
-const Followbtn = tw.button`
-   h-7
-   px-2
-   rounded-md
-   bg-gray-700
-   text-white
-   font-primary
-   text-[1rem]
-   font-semibold
-   cursor-pointer
-`

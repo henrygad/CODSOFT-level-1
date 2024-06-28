@@ -1,15 +1,18 @@
 import Screenpanel from './Screenpanel'
 import Nav from './Nav'
 import { Navlist } from '../ui/List'
-import { Input, Label, Textarea } from '../ui/form'
+import { Input, Label } from '../ui/form'
 import Addnewimage from './Addnewimage'
 import Mobilenav from './Mobilenav'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import useContextBlogpost from '../hooks/useContextBlogpost'
-import { NavLink} from 'react-router-dom'
-import { useContextUserData, useCopyLinkBtn, useDeleteBlogpostBtn, useRedirectToEditPage } from '../hooks'
+import { NavLink, useNavigate } from 'react-router-dom'
+import { useContextAuthentication, useCopyLinkBtn, useDeleteBlogpostBtn } from '../hooks'
+import Bodytexteditor from './Bodytexteditor'
+import Titletexteditor from './Titletexteditor'
 
-type Props = {
+
+type Editblogpostprops = {
   toCreateNewBlogpost?: boolean
   id?: string
   titleExist?: string
@@ -21,41 +24,38 @@ type Props = {
   Published?: boolean
 }
 
-const Blogposteditor = ({
-  toCreateNewBlogpost,
-  Published = false,
-  id = 'incoming',  titleExist = '', bodyExist = '', imageExist = '', slugExist = '', catigoryExist = '', tagsExist = '',
-}: Props) => {
-  const { userData: {userName} } = useContextUserData()
-  const {  dispatch } = useContextBlogpost()
+const Blogposteditor = ({ toCreateNewBlogpost, Published = false, id = 'ddhdh', titleExist = '', bodyExist = '', imageExist = '', slugExist = '', catigoryExist = '', tagsExist = '' }: Editblogpostprops) => {
 
-  const { Displayimage, putImage } = Addnewimage({ image: imageExist })
-  const [title, setTitle] = useState(titleExist)
-  const [body, setBody] = useState(bodyExist)
+  const { loginUser } = useContextAuthentication()
+  const { dispatch } = useContextBlogpost()
+
+  const { Displaybodyeditor, bodyContextJS } = Bodytexteditor({ body: bodyExist })
+  const { Displaytitleeditor, titleContextJS } = Titletexteditor({ title: titleExist })
+  const { Displayimageinput, getImage, isImageChanged, setisImageChanged } = Addnewimage({ image: imageExist })
   const [slug, setSlug] = useState(slugExist)
   const [catigory, setCatigory] = useState(catigoryExist)
   const [tags, setTags] = useState(tagsExist)
+
   const [isPublished, setIsPublised] = useState(Published)
   const [toEdit, setToEdit] = useState(toCreateNewBlogpost)
 
-  const handleSlugPatter = (value: String, devidePatter: string) => {
-    const spliteValue = value.split(' ')
-    return spliteValue.join(`${devidePatter}`)
-  }
-  const slugPartter = handleSlugPatter(slug ? slug : title, '-')
-  const altSlug = toCreateNewBlogpost ? slugPartter : slugExist
-  const { deleteBlogpost } = useDeleteBlogpostBtn({id})
-  const { Displayeditbtn } = useRedirectToEditPage({ authorUserName: userName, slug: altSlug })
-  const { copyLink } = useCopyLinkBtn({ authorUserName: userName, slug: altSlug })
+  const handleSlug = ({ slug, title = ' ', pattern }: { slug: string, title: string | undefined, pattern: string }) => {
+    if (slug) {
+      return createSlug(slug, pattern)
+    } else if (!slug && title) {
+      return createSlug(title, pattern)
+    }
 
-  const handleCleanUpInputs = () => {
-    setTitle('')
-    setBody('')
-    setSlug('')
-    setCatigory('')
-    setTags('')
-    setIsPublised(false)
+    function createSlug(value: String, pattern: string = '-') {
+      const spliteValue = value.split(' ')
+      return spliteValue.join(`${pattern}`)
+    }
   }
+  const altSlug = handleSlug({ slug, title: titleContextJS?.blocks[0].text, pattern: '-' })
+
+  const { deleteBlogpost } = useDeleteBlogpostBtn({ id })
+  const { copyLink } = useCopyLinkBtn({ authorUserName: loginUser, slug: altSlug })
+  const navigateToEdit = useNavigate()
 
   const handleDisablePublishblogpostBtn = () => {
     if (toCreateNewBlogpost) {
@@ -63,18 +63,29 @@ const Blogposteditor = ({
     } else return !toEdit
   }
 
-  const handleAddBlogpost = (e: React.FormEvent<HTMLFormElement>) => {
+  const Globalnavlist = () => {
+    return <>
+      {altSlug && <Navlist><button disabled={handleDisablePublishblogpostBtn()} type='submit'>{!handleDisablePublishblogpostBtn() ? 'Publish' : 'Published'}</button></Navlist>}
+      {altSlug && !handleDisablePublishblogpostBtn() && <Navlist ><input type='button' value={'Draft'} /></Navlist>}
+      {isPublished && <Navlist><input type='button' value='Delete' onClick={deleteBlogpost} /></Navlist>}
+      {isPublished && <Navlist><input type='button' value='CopyLink' onClick={copyLink} /></Navlist>}
+      {isPublished && <Navlist><NavLink to={`/${loginUser}/${altSlug}/post`}><input type='button' value='View' /></NavLink></Navlist>}
+      {isPublished && <Navlist><NavLink to='/createblogpost' ><input type='button' value='New blogpost' /></NavLink></Navlist>}
+    </>
+  }
+
+  const handlePublishBlogpost = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
 
     const bodyContent = {
       id,
-      title,
-      body,
-      putImage,
+      body: bodyContextJS,
+      title: titleContextJS,
+      image: getImage,
       slug: altSlug,
       catigory,
       tags,
-      authorUserName: userName
+      authorUserName: loginUser
     }
 
     if (!altSlug) { console.log('no post was added') }
@@ -83,81 +94,67 @@ const Blogposteditor = ({
         dispatch({ type: "CREATE_BLOGPOST", payload: bodyContent })
         setIsPublised(true)
       } else {
-        dispatch({type: "EDIT_BLOGPOST", payload: {...bodyContent, id} })
+        dispatch({ type: "EDIT_BLOGPOST", payload: { ...bodyContent, id } })
         setToEdit(false)
       }
+
+      navigateToEdit(`/${altSlug}/editblogpost`)
     }
   }
 
 
-  return <form action="" className='w-full h-full space-y-8 md:space-y-0 md:flex' onSubmit={handleAddBlogpost}>
-    <Screenpanel className='w-full md:w-[60%] min-h-full order-1' Children={
+  return <form action="" className='block md:flex flex-wrap md:flex-nowrap justify-start gap-6 md:gap-0 w-full h-full' onSubmit={handlePublishBlogpost}>
+    <Screenpanel order={1} initailWidth={640} minWidth={320} maxWidth={2000} mobileDefaultWidth={380} dragEle={true} Children={
       <div className='h-full'>
-        <div className='md:hidden'>
-          <Mobilenav Children={
-            <>
-              {altSlug && <Navlist><button disabled={handleDisablePublishblogpostBtn()} type='submit' className='shadow-md p-1 rounded '>{!handleDisablePublishblogpostBtn() ? 'publish' : 'Published'}</button></Navlist>}
-              {altSlug && !handleDisablePublishblogpostBtn() && <Navlist className='shadow-md p-1 rounded'><input type='button' value={'draff'} className='shadow-md p-1 rounded' /></Navlist>}
-              {isPublished && <Navlist><input className='shadow-md p-1 rounded' type='button' value='delete' onClick={deleteBlogpost} /></Navlist>}
-              {isPublished && <Navlist><input type='button' value='copyLink' className='shadow-md p-1 rounded' onClick={copyLink} /></Navlist>}
-              {isPublished && toCreateNewBlogpost && <Navlist> <Displayeditbtn Children={
-                <input type='button' value='edit' />
-              } /> </Navlist>}
-              {isPublished && <Navlist><NavLink to={`/${userName}/${altSlug}/post`}><input type='button' value='view' className='shadow-md p-1 rounded' /></NavLink></Navlist>}
-              {isPublished && <Navlist><NavLink to='/createblogpost' ><input type='button' value='new blogpost' className='shadow-md p-1 rounded' onClick={handleCleanUpInputs} /></NavLink></Navlist>}
-            </>
-          } />
+        <div className='md:hidden h-[30px]'>
+          <Mobilenav Children={<Globalnavlist />} />
         </div>
-        <div className='flex flex-col gap-10 px-4'>
-          <div className='flex gap-2 items-center'>
-            <Input className=' h-[50px]' placeholder='Title...' value={title} onChange={(e) => { setTitle(e.target.value); !toEdit && setToEdit(true) }} />
-          </div>
+        <div className='flex flex-col gap-10'>
           <div >
-            <Textarea className='w-full min-h-[480px] md:min-h-[578px]' placeholder='Create a content..' value={body} onChange={(e) => { setBody(e.target.value); !toEdit && setToEdit(true) }} />
-          </div>
-        </div>
-      </div>
-    } enableAjduster={true} />
-    <Screenpanel className='w-full md:w-[20%] order-2' Children={
-      <div className='flex flex-col justify-center space-y-10 pl-2'>
-        <div className='hidden md:block'>
-          <Nav className="flex-col gap-2" Children={<>
-            <>
-              {altSlug && <Navlist><button disabled={handleDisablePublishblogpostBtn()} type='submit' className='shadow-md p-1 rounded '>{!handleDisablePublishblogpostBtn() ? 'publish' : 'Published'}</button></Navlist>}
-              {altSlug && !handleDisablePublishblogpostBtn() && <Navlist className='shadow-md p-1 rounded'><input type='button' value={'draff'} className='shadow-md p-1 rounded' /></Navlist>}
-              {isPublished && <Navlist><input className='shadow-md p-1 rounded' type='button' value='delete' onClick={deleteBlogpost} /></Navlist>}
-              {isPublished && <Navlist><input type='button' value='copyLink' className='shadow-md p-1 rounded' onClick={copyLink} /></Navlist>}
-              {isPublished && toCreateNewBlogpost && <Navlist> <Displayeditbtn Children={
-                <input type='button' value='edit' />
-              } /> </Navlist>}
-              {isPublished && <Navlist><NavLink to={`/${userName}/${altSlug}/post`}><input type='button' value='view' className='shadow-md p-1 rounded' /></NavLink></Navlist>}
-              {isPublished && <Navlist><NavLink to='/createblogpost' ><input type='button' value='new blogpost' className='shadow-md p-1 rounded' onClick={handleCleanUpInputs} /></NavLink></Navlist>}
-            </>
-          </>} />
-        </div>
-        <div className='space-y-2'>
-          <div>
-            <Label className='block' htmlFor='slug' >Add slug</Label>
-            <Input id='slug' className='max-w-60' placeholder='create blogpost slug' value={altSlug} onChange={(e) => setSlug(e.target.value)} />
+            <Displaytitleeditor />
           </div>
           <div>
-            <Label className='block'>Add image</Label>
-            <Displayimage className='w-full h-60 object-contain max-w-60' />
+            <Displaybodyeditor />
           </div>
         </div>
       </div>
     } />
-    <Screenpanel className='w-full md:w-[20%] min-h-full order-0' Children={
-      <div className='flex flex-col gap-4 pr-1'>
+    <Screenpanel full={true} order={2} initailWidth={320} minWidth={200} maxWidth={320} mobileDefaultWidth={380} dragEle={false} Children={
+      <div className='flex flex-col items-start w-full space-y-10'>
+        <div className='hidden md:block'>
+          <Nav className="flex-col gap-2" Children={<Globalnavlist />} />
+        </div>
+        <div className='w-full space-y-3'>
+          <div>
+            <Label className='block' htmlFor='slug' >Add slug</Label>
+            <Input id='slug' className='max-h-[36px]' placeholder='create blogpost slug' value={altSlug ? altSlug : slug} onChange={(e) => toCreateNewBlogpost ? setSlug(e.target.value) : ''} />
+          </div>
+          <div>
+            <Label className='block'>Add media</Label>
+            <div className='w-auto h-auto space-y-6'>
+              <div className='border-b w-full p-2'>
+                <Displayimageinput />
+              </div>
+              <div className='w-full '>
+                {getImage && <img src={getImage} alt="" className='w-40 h-40 md:w-full md:h-full object-contain' />}
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    } />
+    <Screenpanel order={0} initailWidth={320} minWidth={200} maxWidth={320} mobileDefaultWidth={380} dragEle={true}  Children={
+      <div className='flex flex-col gap-4 w-full'>
         <div className='flex gap-2 items-center'>
           <Label className='text-sm'>Catigory</Label>
-          <Input className='max-h-[36px] max-w-[180px]' placeholder='add catigory...' value={catigory} onChange={(e) => { setCatigory(e.target.value); !toEdit && setToEdit(true) }} />
+          <Input className='max-h-[36px] ' placeholder='add catigory...' value={catigory} onChange={(e) => { setCatigory(e.target.value); !toEdit && setToEdit(true) }} />
         </div>
         <div className='flex gap-2 items-center'>
           <Label className='text-sm'>Tag</Label>
-          <Input className='max-h-[36px] max-w-[180px]' placeholder='add tags...' value={tags} onChange={(e) => { setTags(e.target.value); !toEdit && setToEdit(true) }} />
+          <Input className='max-h-[36px]' placeholder='add tags...' value={tags} onChange={(e) => { setTags(e.target.value); !toEdit && setToEdit(true) }} />
         </div>
-      </div>} enableAjduster={true} />
+      </div>
+    } />
   </form>
 }
 
