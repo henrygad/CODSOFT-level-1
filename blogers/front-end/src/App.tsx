@@ -1,5 +1,5 @@
 import { Routes, Route, Navigate } from "react-router-dom"
-import { Home, About, Contact, Search, Profile, Editeprofile, Creatablogpost, Singleblogpostpage, Editblogpost, Page404, Settings, Timeline, Notification } from './pages'
+import { Home, About, Contact, Search, Profile, Editeprofile, Creatablogpost, Singleblogpostpage, Editblogpost, Page404, Settings, Timeline, Notification, Messages } from './pages'
 import { Suspense, useEffect } from "react"
 import { Botttomnav, Header } from './components'
 import { useContextAuthentication } from "./hooks"
@@ -27,6 +27,7 @@ const App = () => {
         <Route path="/:slug/editblogpost" element={isLogin ? <Editblogpost /> : <Navigate to={'/'} />} />
         <Route path="/Search" element={isLogin ? <Search /> : <Navigate to={'/'} />} />
         <Route path="/settings" element={isLogin ? <Settings /> : <Navigate to={'/'} />} />
+        <Route path="/messages" element={isLogin ? <Messages/> : <Navigate to={'/'} />} />
         <Route path="*" element={<Page404 />} />
       </Routes>
     </Suspense>

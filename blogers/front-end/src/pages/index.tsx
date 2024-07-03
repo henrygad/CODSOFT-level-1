@@ -12,6 +12,7 @@ const Settings = lazy(()=> import('./Settings'))
 const Page404 = lazy(()=> import('./Page404'))
 const Timeline = lazy(()=> import('./Timeline'))
 const Notification = lazy(()=> import('./Notification'))
+const Messages = lazy(()=> import('./Messages'))
 
 
 export {
@@ -28,4 +29,5 @@ export {
   Page404,
   Timeline,
   Notification,
+  Messages,
 }

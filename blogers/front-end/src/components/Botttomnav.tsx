@@ -13,7 +13,7 @@ const Botttomnav = () => {
         { url: '/timeline', displayName: <Homeicon/>, linkName: 'home' },
         { url: '/search', displayName: <Searchicon size='2'/>, linkName: 'search'},
         { url: '/notification', displayName: <Notificationsicon/>, linkName: 'notification' },
-        { url: '/directmessage', displayName: <Mailicon/>, linkName: 'message' },
+        { url: '/messages', displayName: <Mailicon/>, linkName: 'message' },
         { url: '/' + loginUser, displayName: <Profileicon/>, linkName: 'profile page' },
     ]
 
